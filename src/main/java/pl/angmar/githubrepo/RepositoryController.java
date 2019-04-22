@@ -15,7 +15,7 @@ public class RepositoryController {
     }
 
     @RequestMapping("/repositories/{owner}/{repositoryName}")
-    public RepositoryInfo getRepositoryInfo(@PathVariable String owner, @PathVariable String repositoryName){
+    public RepositoryInfo getRepositoryInfo(@PathVariable String owner, @PathVariable String repositoryName) {
         return repoInfoService.getInfo(owner, repositoryName);
     }
 }
