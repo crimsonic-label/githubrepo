@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class RepositoryController {
 
     private RepoInfoService repoInfoService;
-    private static final String PATH = "/error";
 
     public RepositoryController(RepoInfoService repoInfoService) {
         this.repoInfoService = repoInfoService;
