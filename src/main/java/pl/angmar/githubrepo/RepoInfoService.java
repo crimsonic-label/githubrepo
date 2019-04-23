@@ -19,20 +19,21 @@ public class RepoInfoService {
     public RepositoryInfo getInfo(String owner, String repositoryName){
         RestTemplate restTemplate = new RestTemplate();
         try {
-            RepositoryInfo repoinfo = restTemplate.getForObject(
+            RepositoryInfo repositoryInfo = restTemplate.getForObject(
                     "https://api.github.com/repos/" +
                             URLEncoder.encode(owner, "UTF-8") +
                             "/" +
                             URLEncoder.encode(repositoryName, "UTF-8"),
                     RepositoryInfo.class);
 
-            logger.info(repoinfo.toString());
-            return repoinfo;
+            logger.info(repositoryInfo.toString());
+            return repositoryInfo;
 
         } catch(HttpClientErrorException e) {
             logger.error("Error reading {}, {} repository info", owner, repositoryName);
             throw new ResponseStatusException(HttpStatus.valueOf(e.getRawStatusCode()),
                         "Repository " + owner + "/" + repositoryName + ": " + e.getMessage(), e);
+
         } catch (UnsupportedEncodingException e) {
             logger.error("Cannot encode parameters {} or {}", owner, repositoryName, e);
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
